@@ -3,28 +3,28 @@
 
 Flower::Flower(sf::RenderWindow* window) : window(window)
 {
-    minRadius = 15;
-    maxRadius = 20;
+    minRadius = 15.f;
+    maxRadius = 20.f;
     centerRadius = maxRadius;
     growing = false;
 
     center.setRadius(centerRadius);
     center.setFillColor(sf::Color::Yellow);
-    center.setPosition(sf::Vector2f(100 - centerRadius, 100 - centerRadius));
-    center.setOrigin(sf::Vector2f(0, 0));
+    center.setPosition(sf::Vector2f(100.f - centerRadius, 100.f - centerRadius));
+    center.setOrigin(sf::Vector2f(0.f, 0.f));
 
     const int petalCount = 6;
     for (int i = 0; i < petalCount; ++i) {
         sf::CircleShape petal;
-        petal.setRadius(26);
+        petal.setRadius(26.f);
         petal.setFillColor(sf::Color::Red);
         petals.push_back(petal);
     }
 
     // Create stem
-    stem.setSize(sf::Vector2f(8, 80));
+    stem.setSize(sf::Vector2f(8.f, 80.f));
     stem.setFillColor(sf::Color(0, 150, 0));
-    stem.setPosition(sf::Vector2f(96, 100));
+    stem.setPosition(sf::Vector2f(96.f, 100.f));
 }
 
 void Flower::draw()
@@ -47,7 +47,7 @@ void Flower::draw()
         }
 
         center.setRadius(centerRadius);
-        center.setPosition(sf::Vector2f(100 - centerRadius, 100 - centerRadius));
+        center.setPosition(sf::Vector2f(100.f - centerRadius, 100.f - centerRadius));
 
         frameClock.restart();
     }
@@ -58,9 +58,9 @@ void Flower::draw()
     const int petalCount = petals.size();
 
     for (int i = 0; i < petalCount; ++i) {
-        float angle = i * 2 * 3.14 / petalCount;
-        float x = 100 + cos(angle) * petalDistance - petals[i].getRadius();
-        float y = 100 + sin(angle) * petalDistance - petals[i].getRadius();
+        float angle = static_cast<float>(i) * 2.f * 3.14f / petalCount;
+        float x = 100.f + cos(angle) * petalDistance - petals[i].getRadius();
+        float y = 100.f + sin(angle) * petalDistance - petals[i].getRadius();
 
         petals[i].setPosition(sf::Vector2f(x, y));
         window->draw(petals[i]);
